@@ -5,5 +5,5 @@ install:
 	pip install -r requirements.txt
 
 download:
-	python get-era5-data/download.py
+	python download.py
 
