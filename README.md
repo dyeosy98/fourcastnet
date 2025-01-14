@@ -1,7 +1,17 @@
+### Requirements
+- Python 3
+- File system with at least XX TB capacity
+
 ### Install
 
-1. `python3 -m venv venv`
+1. `python -m venv venv`
 
-2. `source venv/bin/activate`
+2. `make activate`
 
-3. 
+### Configure
+
+3. Edit **config.yaml** accordingly, especially with 
+
+### Download
+
+4. `make download`
