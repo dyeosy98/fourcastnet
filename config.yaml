@@ -1,0 +1,25 @@
+download_path: "data"
+bucket_name: "nsf-ncar-era5"
+start_train_year: 2010
+end_train_year: 2010
+test_years: 
+  - 2011
+out_of_sample_years:
+  - 2012
+pl_folder: "e5.oper.an.pl"
+sfc_folder: "e5.oper.an.sfc" 
+pl_params:
+  - "t"
+  - "u"
+  - "v"
+  - "z"
+  - "r"
+sfc_params:
+  - "tcwv"
+  - "msl"
+  - "sp"
+  - "10u"
+  - "10v"
+  - "100u"
+  - "100v"
+  - "2t"
