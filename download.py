@@ -35,11 +35,11 @@ def main():
             for obj in objects["Contents"]:
                 object_key = obj["Key"]
                 if any(f'_{param}.' in object_key for param in config["pl_params"]):
-                    obj_path = f'{config["download_path"]}/{year}-{month}-{"".join(obj["Key"].replace("/", "-").split(".")[7:-1])}.nc'
+                    obj_path = f'{config["download_path"]}/{year}-{month}-{object_key.replace("/", "-").split(".")[7].split("_")[-1]}-{object_key.replace("/", "-").split(".")[9]}.nc'
                     if os.path.exists(obj_path):
                         print(f'{obj_path} already exists, skipping download')
                     else: 
-                        print(f'Downloading {object_key}')
+                        print(f'Downloading {object_key} as {obj_path}')
                         try: 
                             s3_client.download_file(config["bucket_name"], object_key, obj_path)
                         except botocore.exceptions.ClientError as e:
@@ -54,11 +54,11 @@ def main():
             for obj in objects["Contents"]:
                 object_key = obj["Key"]
                 if any(f'_{param}.' in object_key for param in config["sfc_params"]):
-                    obj_path = f'{config["download_path"]}/{year}-{month}-{"".join(obj["Key"].replace("/", "-").split(".")[7:-1])}.nc'
+                    obj_path = f'{config["download_path"]}/{year}-{month}-{object_key.replace("/", "-").split(".")[7].split("_")[-1]}-{object_key.replace("/", "-").split(".")[9]}.nc'
                     if os.path.exists(obj_path):
                         print(f'{obj_path} already exists, skipping download')
                     else: 
-                        print(f'Downloading {object_key}')
+                        print(f'Downloading {object_key} as {obj_path}')
                         try: 
                             s3_client.download_file(config["bucket_name"], object_key, obj_path)
                         except botocore.exceptions.ClientError as e:
@@ -68,20 +68,6 @@ def main():
                                 raise
 
     print(objects_to_download)
-
-    # Download
-    # for obj in objects_to_download:
-    #     if os.path.exists(f'{config["download_path"]}/{obj.replace("/", "-")}'):
-    #         print(f'{obj} already exists, skipping download')
-    #     else: 
-    #         print(f'Downloading {obj}')
-    #         try: 
-    #             s3_client.download_file(config["bucket_name"], obj, f'{config["download_path"]}/{obj.replace("/", "-")}')
-    #         except botocore.exceptions.ClientError as e:
-    #             if e.response['Error']['Code'] == "404":
-    #                 print(f'The object {obj} does not exist.')
-    #             else:
-    #                 raise
 
 if __name__ == "__main__":
     main()

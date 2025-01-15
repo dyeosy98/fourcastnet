@@ -1,5 +1,5 @@
-activate:
-	source venv/bin/activate
+up:
+	python -m venv venv
 
 install:
 	pip install -r requirements.txt
@@ -7,3 +7,5 @@ install:
 download:
 	python download.py
 
+format:
+	python format.py

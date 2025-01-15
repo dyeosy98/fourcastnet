@@ -1,4 +1,4 @@
-download_path: "data"
+download_path: "/efs/data"
 bucket_name: "nsf-ncar-era5"
 start_train_year: 2010
 end_train_year: 2010

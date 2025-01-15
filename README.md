@@ -6,12 +6,18 @@
 
 1. `python -m venv venv`
 
-2. `make activate`
+2. `make up`
+
+3. `source venv/bin/activate`
 
 ### Configure
 
-3. Edit **config.yaml** accordingly, especially with 
+4. Edit **config.yaml** accordingly, especially with the `download_path` variable.
 
 ### Download
 
-4. `make download`
+5. `make download`
+
+### Parse
+
+6. `make format`
