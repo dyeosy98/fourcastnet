@@ -1,4 +1,3 @@
-import awswrangler as wr
 import boto3
 import botocore
 from botocore import UNSIGNED
@@ -8,11 +7,13 @@ import yaml
 
 def main():
 
-    # Initialize years
-    #print("Initializing years...")
+    # Initialize config
+    #print("Initializing config...")
     with open('config.yaml', 'r') as file:
         config = yaml.safe_load(file)
 
+    # Initialize years
+    #print("Initializing years...")
     train_years = list(range(config["start_train_year"], config["end_train_year"] + 1))
     test_years = config["test_years"]
     out_of_sample_years = config["out_of_sample_years"]

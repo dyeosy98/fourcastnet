@@ -1,4 +1,5 @@
 download_path: "/efs/data"
+write_path: "/efs/processed"
 bucket_name: "nsf-ncar-era5"
 start_train_year: 2010
 end_train_year: 2010
@@ -6,6 +7,7 @@ test_years:
   - 2011
 out_of_sample_years:
   - 2012
+dt: 6
 pl_folder: "e5.oper.an.pl"
 sfc_folder: "e5.oper.an.sfc" 
 pl_params:
@@ -23,3 +25,35 @@ sfc_params:
   - "100u"
   - "100v"
   - "2t"
+pressure_levels:
+  t:
+    - 100
+    - 250
+    - 500
+    - 850
+    - 900
+  u:
+    - 100
+    - 250
+    - 500
+    - 850
+    - 900
+    - 1000
+  v:
+    - 100
+    - 250
+    - 500
+    - 850
+    - 900
+    - 1000
+  z:
+    - 50
+    - 100
+    - 250
+    - 500
+    - 850
+    - 900
+    - 1000
+  r:
+    - 500
+    - 850
