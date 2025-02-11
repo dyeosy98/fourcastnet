@@ -1,12 +1,12 @@
 download_path: "/efs/data"
 write_path: "/efs/processed"
 bucket_name: "nsf-ncar-era5"
-start_train_year: 2010
-end_train_year: 2010
+start_train_year: 2013
+end_train_year: 2013
 test_years: 
-  - 2011
+  - 2014
 out_of_sample_years:
-  - 2012
+  - 2015
 dt: 6
 pl_folder: "e5.oper.an.pl"
 sfc_folder: "e5.oper.an.sfc" 

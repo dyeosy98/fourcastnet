@@ -44,3 +44,8 @@ The scripts have been tested on an Amazon EC2 c6a.4xlarge instance, with an Amaz
 
     - If the script identifies that the .h5 file for a year already exists, it will skip processing that year's data. Therefore, if the script is interrupted midway through processing one year's data, the partial file should be deleted before running the script again.
 
+### Run Training
+
+7. Start compute node: `srun -N --pty /bin/bash -il`
+
+8. 

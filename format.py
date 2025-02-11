@@ -131,7 +131,7 @@ def main():
 
     # Create an H5 file for each year of data
 
-    for year in ["2012"]: # TODO: Update to all years
+    for year in ["2014"]: # TODO: Update to all years
 
         print(f'Processing year {year}...')
    
@@ -151,7 +151,7 @@ def main():
             no_of_hours = 366 * 24 / dt
         else:
             no_of_hours = 365 * 24 / dt
-        data_ds = outfile.create_dataset("default", (no_of_hours, len(h5params), 721, 1440))
+        data_ds = outfile.create_dataset("fields", (no_of_hours, len(h5params), 721, 1440))
 
         selected_hours = list(filter(lambda hour: hour % dt ==0, range(0, 24)))
 
