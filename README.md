@@ -22,7 +22,7 @@ The scripts have been tested on an Amazon EC2 c6a.4xlarge instance, with an Amaz
 
 1. Clone the repository from your EC2 instance: `git clone https://github.com/dyeosy98/fourcastnet.git`
 
-2. Create a virtual environment and install requirements: `make up`
+2. Create a virtual environment and install requirements: `make venv`
 
 3. Activate the virtual environment: `source venv/bin/activate`
 
@@ -43,9 +43,3 @@ The scripts have been tested on an Amazon EC2 c6a.4xlarge instance, with an Amaz
     - It takes around 8 hours to process one year's worth of data, amounting to around 190 GB per .h5 file. 
 
     - If the script identifies that the .h5 file for a year already exists, it will skip processing that year's data. Therefore, if the script is interrupted midway through processing one year's data, the partial file should be deleted before running the script again.
-
-### Run Training
-
-7. Start compute node: `srun -N --pty /bin/bash -il`
-
-8. 
