@@ -22,21 +22,23 @@ The scripts have been tested on an Amazon EC2 c6a.4xlarge instance, with an Amaz
 
 1. Clone the repository from your EC2 instance: `git clone https://github.com/dyeosy98/fourcastnet.git`
 
-2. Create a virtual environment and install requirements: `make venv`
+2. Create a virtual environment: `make venv`
 
 3. Activate the virtual environment: `source venv/bin/activate`
 
+4. Install requirements: `make install`
+
 ### Download data and format it
 
-4. Edit **config.yaml** accordingly, especially with the `download_path` variable.
+5. Edit **config.yaml** accordingly, especially with the `download_path` variable.
 
-5. Download the data: `make download`.
+6. Download the data: `make download`.
 
     - The **download.py** script gets all relevant data as dictated by **config.yaml**.
 
     - One year's worth of data per the default **config.yaml** settings amounts to around 2.45 TiB, and can take almost 8 hours to be downloaded.
 
-6. Extract the relevant data: `make format`.
+7. Extract the relevant data: `make format`.
     
     - The **format.py** script processes data by year and produces 1 .h5 file per year (e.g. 2010.h5, 2011.h5). 
     

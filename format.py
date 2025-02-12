@@ -6,7 +6,7 @@ from datetime import date, timedelta
 import h5py
 import os
 import numpy as np
-import random
+# import random
 import yaml
 
 def get_file_date(filename):
