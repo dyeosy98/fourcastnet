@@ -28,65 +28,51 @@ def main():
         config = yaml.safe_load(file)
 
     h5params = generate_params_list(config)
-    print("h5params: ", h5params)
 
     # path = "/efs/processed/test"
+    # path = "/mnt/efs/fourcastnet-data/processed/test"
     path = "/home/ubuntu/test_data"
 
     files = os.listdir(path)
-    print("files: ", files)
+    # print("files: ", files)
 
-    for file in files:
-        f = h5py.File(f'{path}/{file}', 'r')
-        keys = list(f.keys())
-        print("keys: ", keys)
-        data_key = keys[0]
-        print("data_key: ", data_key)
-        param_key = keys[1]
-        print("param_key: ", param_key)
+    means = []
+    stds = []
 
-        print(np.shape(f[data_key]))
-        print(f[param_key][0])
+    for i in range(0, len(files)):
+        
+        with h5py.File(f'{path}/{files[i]}', 'r') as f:
 
-        print("mean: ", np.mean(f[data_key], (0,2,3)))
+            # print(f'Calculating mean for {files[i]}...')
+            print(f'Calculating std for {files[i]}...')
+
+            keys = list(f.keys())
+            data_key = keys[0]
+            param_key = keys[1]
+
+            # means.append(np.mean(f[data_key], (0, 2, 3))) # means[i] will be list of 34 
+            stds.append(np.std(f[data_key], (0, 2, 3))) # stds[i] will be list of 34             
 
     #f[hour][param][latitude][longitude]
     #for every param, find mean of numbers for all hour, latitude, longitude
 
-    for h5param in h5params:
-        print(f[h5param])
-        # print("mean: ", np.mean())
-        
+    # print("Aggregating means...")
+    print("Aggregating stds...")
+    for i in range(0, len(h5params)):
 
-# Open the zarr files and construct the xarray from them
-    # zarr_arrays = [xr.open_zarr(path) for path in zarr_paths]
-    # era5_xarray = xr.concat(
-    #     [z[list(z.data_vars.keys())[0]] for z in zarr_arrays], dim="channel"
-    # )
-    # era5_xarray = era5_xarray.transpose("time", "channel", "latitude", "longitude")
-    # era5_xarray.name = "fields"
-    # era5_xarray = era5_xarray.astype("float32")
+        # params_means = np.mean(means, 0) 
+        # np.save(
+        #     "/home/ubuntu/fourcastnet/global_means.npy", params_means.reshape(1, -1, 1, 1)
+        # )
 
-    # # Save mean and std
-    # stats_path = os.path.join(cfg.hdf5_store_path, "stats")
-    # print(f"Saving global mean and std at {stats_path}")
-    # if not os.path.exists(stats_path):
-    #     os.makedirs(stats_path)
-    # era5_mean = np.array(
-    #     era5_xarray.mean(dim=("time", "latitude", "longitude")).values
-    # )
-    # np.save(
-    #     os.path.join(stats_path, "global_means.npy"), era5_mean.reshape(1, -1, 1, 1)
-    # )
-    # era5_std = np.array(
-    #     era5_xarray.std(dim=("time", "latitude", "longitude")).values
-    # )
-    # np.save(
-    #     os.path.join(stats_path, "global_stds.npy"), era5_std.reshape(1, -1, 1, 1)
-    # )
-    # print(f"Finished saving global mean and std at {stats_path}")
+        # print(f'{h5params[i]} mean: {params_means[i]}')
 
+        params_stds = np.std(stds, 0)
+        np.save(
+            "/home/ubuntu/fourcastnet/global_stds.npy", params_stds.reshape(1, -1, 1, 1)
+        )
 
+        print(f'{h5params[i]} std: {params_stds[i]}')
 
 if __name__ == "__main__":
     main()
