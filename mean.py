@@ -29,12 +29,9 @@ def main():
 
     h5params = generate_params_list(config)
 
-    # path = "/efs/processed/test"
-    # path = "/mnt/efs/fourcastnet-data/processed/test"
-    path = "/home/ubuntu/test_data"
+    path = "/mnt/efs/processed/train"
 
     files = os.listdir(path)
-    # print("files: ", files)
 
     means = []
     stds = []
@@ -43,36 +40,28 @@ def main():
         
         with h5py.File(f'{path}/{files[i]}', 'r') as f:
 
-            # print(f'Calculating mean for {files[i]}...')
-            print(f'Calculating std for {files[i]}...')
+            print(f'Calculating mean for {files[i]}...')
 
             keys = list(f.keys())
             data_key = keys[0]
             param_key = keys[1]
 
-            # means.append(np.mean(f[data_key], (0, 2, 3))) # means[i] will be list of 34 
-            stds.append(np.std(f[data_key], (0, 2, 3))) # stds[i] will be list of 34             
+            means.append(np.mean(f[data_key], (0, 2, 3))) # means[i] will be list of 34 
 
     #f[hour][param][latitude][longitude]
     #for every param, find mean of numbers for all hour, latitude, longitude
 
-    # print("Aggregating means...")
-    print("Aggregating stds...")
+    print("Aggregating means...")
+    # print("Aggregating stds...")
     for i in range(0, len(h5params)):
 
-        # params_means = np.mean(means, 0) 
-        # np.save(
-        #     "/home/ubuntu/fourcastnet/global_means.npy", params_means.reshape(1, -1, 1, 1)
-        # )
-
-        # print(f'{h5params[i]} mean: {params_means[i]}')
-
-        params_stds = np.std(stds, 0)
+        params_means = np.mean(means, 0) 
+        print(f'params_means ({np.shape(params_means)}): {params_means}')
         np.save(
-            "/home/ubuntu/fourcastnet/global_stds.npy", params_stds.reshape(1, -1, 1, 1)
+            "/home/ubuntu/fourcastnet/test_global_means.npy", params_means.reshape(1, -1, 1, 1)
         )
 
-        print(f'{h5params[i]} std: {params_stds[i]}')
+        print(f'{h5params[i]} mean: {params_means[i]}')
 
 if __name__ == "__main__":
     main()
