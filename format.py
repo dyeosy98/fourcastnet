@@ -131,7 +131,8 @@ def main():
 
     # Create an H5 file for each year of data
 
-    for year in ["2014"]: # TODO: Update to all years
+    # for year in ["2014"]: # TODO: Update to all years
+    for year in all_years: 
 
         print(f'Processing year {year}...')
    
@@ -157,7 +158,7 @@ def main():
 
         files = []
         for nc_file in nc_files:
-            if nc_file.startswith(year) and nc_file.endswith(".nc"):
+            if nc_file.startswith(str(year)) and nc_file.endswith(".nc"):
                 files.append(nc_file)
         print(f'Number of files for the year {year}: {len(files)}')
 
